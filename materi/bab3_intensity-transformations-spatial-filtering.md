@@ -809,3 +809,252 @@ Tidak ada satu filter yang universal terbaik. Pilihan filter harus didasarkan pa
 2. Tingkat preservasi detail yang dibutuhkan
 3. Constraint komputasi dan real-time requirements
 4. Kualitas visual yang diinginkan untuk aplikasi spesifik
+
+---
+
+## 14. Latihan Implementasi Matematis
+
+### Soal 3.4: Transformasi Intensitas dengan Matriks Konkret
+
+**Pertanyaan:** Diberikan matriks citra grayscale 5×5 berikut (8-bit):
+
+```
+     50   75   100  125  150
+     60   80   110  130  160
+     70   85   115  135  170
+     80   90   120  140  180
+     90   95   125  145  190
+```
+
+Lakukan transformasi berikut dan tampilkan matriks hasilnya:
+
+**a. Negative Transformation**
+**b. Contrast Stretching** dengan r_min = 50, r_max = 190
+**c. Logarithmic Transformation** dengan c = 40
+**d. Gamma Correction** dengan γ = 0.5 dan c = 1
+
+**Jawaban:**
+
+**a. Negative Transformation**
+Formula: s = 255 - r
+
+```
+     205  180  155  130  105
+     195  175  145  125   95
+     185  170  140  120   85
+     175  165  135  115   75
+     165  160  130  110   65
+```
+
+**b. Contrast Stretching**
+Formula: s = (r - 50) × (255)/(190 - 50) = (r - 50) × 1.821
+
+```
+      0   45   91   136   182
+     18   55  109   146   200
+     36   64  118   155   218
+     55   73  127   164   236
+     73   82  136   173   255
+```
+
+**c. Logarithmic Transformation**
+Formula: s = 40 × log(1 + r)
+
+```
+     157  170  179  186  192
+     161  172  181  188  194
+     165  174  183  189  196
+     169  176  184  191  198
+     172  178  186  192  200
+```
+
+**d. Gamma Correction** (γ = 0.5)
+Formula: s = r^0.5
+
+```
+     7.07  8.66  10.00  11.18  12.25
+     7.75  8.94  10.49  11.40  12.65
+     8.37  9.22  10.72  11.62  13.04
+     8.94  9.49  10.95  11.83  13.42
+     9.49  9.75  11.18  12.04  13.78
+```
+
+---
+
+### Soal 3.5: Histogram Equalization dengan Data Numerik
+
+**Pertanyaan:** Diberikan citra grayscale 4×4 berikut:
+
+```
+     85   90   85   80
+     75   85   95   70
+     80   75   90   85
+     70   80   75   85
+```
+
+Lakukan histogram equalization langkah demi langkah:
+
+**Langkah 1:** Hitung histogram
+**Langkah 2:** Hitung PMF (Probability Mass Function)
+**Langkah 3:** Hitung CDF (Cumulative Distribution Function)
+**Langkah 4:** Lakukan transformasi equalization
+**Langkah 5:** Tampilkan matriks hasil equalization
+
+**Jawaban:**
+
+**Langkah 1: Histogram**
+```
+Intensitas 70: 2 piksel
+Intensitas 75: 3 piksel
+Intensitas 80: 3 piksel
+Intensitas 85: 5 piksel
+Intensitas 90: 2 piksel
+Intensitas 95: 1 piksel
+Total: 16 piksel
+```
+
+**Langkah 2: PMF**
+```
+p(70)  = 2/16  = 0.125
+p(75)  = 3/16  = 0.188
+p(80)  = 3/16  = 0.188
+p(85)  = 5/16  = 0.313
+p(90)  = 2/16  = 0.125
+p(95)  = 1/16  = 0.063
+```
+
+**Langkah 3: CDF**
+```
+CDF(70)  = 0.125
+CDF(75)  = 0.125 + 0.188 = 0.313
+CDF(80)  = 0.313 + 0.188 = 0.501
+CDF(85)  = 0.501 + 0.313 = 0.814
+CDF(90)  = 0.814 + 0.125 = 0.939
+CDF(95)  = 0.939 + 0.063 = 1.002
+```
+
+**Langkah 4: Transformasi Equalization**
+s = round(CDF × 255)
+```
+s(70) = round(0.125 × 255) = 32
+s(75) = round(0.313 × 255) = 80
+s(80) = round(0.501 × 255) = 128
+s(85) = round(0.814 × 255) = 208
+s(90) = round(0.939 × 255) = 239
+s(95) = round(1.002 × 255) = 255
+```
+
+**Langkah 5: Matriks Hasil Equalization**
+```
+     208  239  208  128
+     80   208  255  32
+     128  80   239  208
+     32   128  80   208
+```
+
+**Analisis Hasil:**
+- Rentang intensitas asli: [70, 95] (span 25)
+- Rentang intensitas setelah equalization: [32, 255] (span 223)
+- Kontras meningkat secara signifikan
+- Distribusi intensitas lebih merata
+
+---
+
+### Soal 3.6: Spatial Filtering dengan Operasi Konvolusi
+
+**Pertanyaan:** Diberikan matriks citra 5×5 dan filter kernel 3×3 berikut:
+
+**Citra Input:**
+```
+     10   20   30   40   50
+     15   25   35   45   55
+     20   30   40   50   60
+     25   35   45   55   65
+     30   40   50   60   70
+```
+
+**Kernel yang akan digunakan:**
+
+**a. Mean Filter:**
+```
+1/9 [1  1  1]
+     [1  1  1]
+     [1  1  1]
+```
+
+**b. Gaussian Filter (σ=1):**
+```
+1/16 [1  2  1]
+      [2  4  2]
+      [1  2  1]
+```
+
+**c. Laplacian Filter:**
+```
+[0  1  0]
+[1 -4  1]
+[0  1  0]
+``**
+
+**d. Sobel Operator (Horizontal):**
+```
+[-1  0  1]
+[-2  0  2]
+[-1  0  1]
+```
+
+Hitung hasil filtering untuk posisi pusat (3,3) yaitu piksel dengan nilai 40. Gunakan zero padding untuk boundary.
+
+**Jawaban:**
+
+**Region 3×3 di sekitar piksel (3,3):**
+```
+     20   30   40
+     25   35   45
+     30   40   50
+```
+
+**a. Mean Filter**
+```
+g(3,3) = (1/9) × (20 + 30 + 40 + 25 + 35 + 45 + 30 + 40 + 50)
+       = (1/9) × 355
+       = 39.44 ≈ 39
+```
+
+**b. Gaussian Filter**
+```
+g(3,3) = (1/16) × [1×20 + 2×30 + 1×40 + 2×25 + 4×35 + 2×45 + 1×30 + 2×40 + 1×50]
+       = (1/16) × [20 + 60 + 40 + 50 + 140 + 90 + 30 + 80 + 50]
+       = (1/16) × 560
+       = 35
+```
+
+**c. Laplacian Filter**
+```
+g(3,3) = [0×20 + 1×30 + 0×40] + [1×25 + (-4)×35 + 1×45] + [0×30 + 1×40 + 0×50]
+       = [0 + 30 + 0] + [25 - 140 + 45] + [0 + 40 + 0]
+       = 30 + (-70) + 40
+       = 0
+```
+
+**d. Sobel Operator (Horizontal)**
+```
+g(3,3) = [-1×20 + 0×30 + 1×40] + [-2×25 + 0×35 + 2×45] + [-1×30 + 0×40 + 1×50]
+       = [-20 + 0 + 40] + [-50 + 0 + 90] + [-30 + 0 + 50]
+       = 20 + 40 + 20
+       = 80
+```
+
+**Analisis Hasil:**
+- **Mean filter:** Menghasilkan nilai rata-rata (39) - smoothing effect
+- **Gaussian filter:** Memberikan bobot lebih ke pusat (35) - better smoothing
+- **Laplacian filter:** Mendeteksi perubahan intensitas (0) - edge detection
+- **Sobel operator:** Mendeteksi gradien horizontal (80) - edge detection
+
+**Interpretasi:**
+- Nilai Laplacian = 0 menunjukkan piksel berada pada area flat (tidak ada edge)
+- Nilai Sobel = 80 menunjukkan adanya perubahan intensitas horizontal
+- Mean dan Gaussian filter memberikan hasil smoothing yang berbeda
+
+**Catatan Implementasi:**
+Untuk citra lengkap, operasi ini diulang untuk setiap piksel (kecuali boundary) dengan sliding window approach.
