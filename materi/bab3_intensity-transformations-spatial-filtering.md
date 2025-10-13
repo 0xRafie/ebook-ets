@@ -971,9 +971,10 @@ Tidak ada satu filter yang universal terbaik. Pilihan filter harus didasarkan pa
 
 ## 📝 **Soal Tambahan Terstruktur**
 
-### **📊 Q1: Histogram Equalization (3-bit Image)**
+### **📊 Q1: Histogram Equalization pada Citra 3-bit**
 
-#### **🎯 Deskripsi Soal**
+#### **Q1: Deskripsi Soal**
+
 Diberikan citra dengan 3 bit/pixel, sehingga rentang nilai yang mungkin adalah 0 hingga 7, dengan distribusi berikut:
 
 | Gray-level value | 0  | 1 | 2 | 3 | 4  | 5 | 6 | 7 |
@@ -987,19 +988,14 @@ Diberikan citra dengan 3 bit/pixel, sehingga rentang nilai yang mungkin adalah 0
 
 ---
 
-#### **📋 Persiapan Data**
-```
-📊 Data Input:
+#### **Q1: Data Input dan Analisis Awal**
+
+**📊 Data Input:**
 - Citra dengan 3 bit/pixel (nilai intensitas 0-7)
 - Total piksel = 10 + 8 + 9 + 2 + 14 + 1 + 5 + 2 = 51
-```
 
----
+**📈 Original Histogram Analysis:**
 
-#### **📈 Langkah 1: Histogram Visualization**
-
-```
-📊 Original Histogram:
 | Value | Frequency | Percentage |
 |-------|-----------|------------|
 | 0     | 10        | 19.6%      |
@@ -1011,83 +1007,81 @@ Diberikan citra dengan 3 bit/pixel, sehingga rentang nilai yang mungkin adalah 0
 | 6     | 5         | 9.8%       |
 | 7     | 2         | 3.9%       |
 
-📈 Analisis Distribusi:
+**📈 Analisis Distribusi:**
 - Nilai dominan: 4 (27.5%)
 - Nilai langka: 3, 5, 7 (3.9% - 2.0%)
 - Rentang nilai: [0, 7]
-```
 
 ---
 
-#### **🔢 Langkah 2: PMF (Probability Mass Function) Calculation**
+#### **Q1: Langkah 1 - Visualisasi Histogram**
 
-```
-📐 Formula: PMF(r) = histogram(r) / total_piksel
-
-📊 Perhitungan PMF:
-┌─────────┬─────────────────┬─────────────────────┐
-│ r (Input) │ h(r) (Frequency) │ PMF(r) Probability │
-├─────────┼─────────────────┼─────────────────────┤
-│ 0       │ 10              │ 10/51 = 0.196       │
-│ 1       │ 8               │ 8/51 = 0.157        │
-│ 2       │ 9               │ 9/51 = 0.176        │
-│ 3       │ 2               │ 2/51 = 0.039        │
-│ 4       │ 14              │ 14/51 = 0.275       │
-│ 5       │ 1               │ 1/51 = 0.020        │
-│ 6       │ 5               │ 5/51 = 0.098        │
-│ 7       │ 2               │ 2/51 = 0.039        │
-└─────────┴─────────────────┴─────────────────────┘
-
-✅ Verifikasi: ΣPMF(r) = 0.196 + 0.157 + 0.176 + 0.039 + 0.275 + 0.020 + 0.098 + 0.039 = 1.000
-```
+Histogram original menunjukkan distribusi yang tidak merata dengan konsentrasi tinggi pada nilai intensitas 4 dan distribusi yang rendah pada nilai ekstrem (3, 5, 7).
 
 ---
 
-#### **📊 Langkah 3: CDF (Cumulative Distribution Function) Calculation**
+#### **Q1: Langkah 2 - Perhitungan PMF**
 
-```
-📐 Formula: CDF(k) = Σ_{i=0}^{k} PMF(i)
+**📐 Formula: PMF(r) = histogram(r) / total_piksel**
 
-📊 Perhitungan CDF:
-┌─────────┬─────────────────┬─────────────────────┬─────────────────────┐
-│ k (Level) │ PMF(k)         │ CDF(k) Cumulative    │ Explanation         │
-├─────────┼─────────────────┼─────────────────────┼─────────────────────┤
-│ 0       │ 0.196           │ 0.196               │ PMF(0)              │
-│ 1       │ 0.157           │ 0.196 + 0.157 = 0.353 │ CDF(0) + PMF(1)   │
-│ 2       │ 0.176           │ 0.353 + 0.176 = 0.529 │ CDF(1) + PMF(2)   │
-│ 3       │ 0.039           │ 0.529 + 0.039 = 0.568 │ CDF(2) + PMF(3)   │
-│ 4       │ 0.275           │ 0.568 + 0.275 = 0.843 │ CDF(3) + PMF(4)   │
-│ 5       │ 0.020           │ 0.843 + 0.020 = 0.863 │ CDF(4) + PMF(5)   │
-│ 6       │ 0.098           │ 0.863 + 0.098 = 0.961 │ CDF(5) + PMF(6)   │
-│ 7       │ 0.039           │ 0.961 + 0.039 = 1.000 │ CDF(6) + PMF(7)   │
-└─────────┴─────────────────┴─────────────────────┴─────────────────────┘
+**📊 Tabel Perhitungan PMF:**
 
-✅ Verifikasi: CDF(7) = 1.000 (Valid)
-```
+| r (Input) | h(r) (Frequency) | PMF(r) Probability | Kalkulasi |
+|-----------|------------------|--------------------|-----------|
+| 0         | 10               | 0.196              | 10/51     |
+| 1         | 8                | 0.157              | 8/51      |
+| 2         | 9                | 0.176              | 9/51      |
+| 3         | 2                | 0.039              | 2/51      |
+| 4         | 14               | 0.275              | 14/51     |
+| 5         | 1                | 0.020              | 1/51      |
+| 6         | 5                | 0.098              | 5/51      |
+| 7         | 2                | 0.039              | 2/51      |
+
+**✅ Verifikasi:** ΣPMF(r) = 0.196 + 0.157 + 0.176 + 0.039 + 0.275 + 0.020 + 0.098 + 0.039 = 1.000 ✓
 
 ---
 
-#### **🎯 Langkah 4: Transformasi Equalization**
+#### **Q1: Langkah 3 - Perhitungan CDF**
 
+**📐 Formula: CDF(k) = Σᵢ₌₀ᵏ PMF(i)**
+
+**📊 Tabel Perhitungan CDF:**
+
+| k (Level) | PMF(k) | CDF(k) Cumulative | Kalkulasi |
+|-----------|---------|-------------------|-----------|
+| 0         | 0.196   | 0.196             | PMF(0)    |
+| 1         | 0.157   | 0.353             | 0.196 + 0.157 |
+| 2         | 0.176   | 0.529             | 0.353 + 0.176 |
+| 3         | 0.039   | 0.568             | 0.529 + 0.039 |
+| 4         | 0.275   | 0.843             | 0.568 + 0.275 |
+| 5         | 0.020   | 0.863             | 0.843 + 0.020 |
+| 6         | 0.098   | 0.961             | 0.863 + 0.098 |
+| 7         | 0.039   | 1.000             | 0.961 + 0.039 |
+
+**✅ Verifikasi:** CDF(7) = 1.000 (Valid) ✓
+
+---
+
+#### **Q1: Langkah 4 - Transformasi Equalization**
+
+**📐 Formula: sₖ = round(CDF(k) × L)**
+**Dimana L = 7 (untuk 3-bit image: 0-7)**
+
+**📊 Tabel Perhitungan Transformasi:**
+
+| k (Input) | CDF(k) | sₖ = round(CDF(k)×7) | Mapping Rule | Hasil |
+|-----------|---------|----------------------|--------------|-------|
+| 0         | 0.196   | 1                    | 0 → 1        | round(1.372) |
+| 1         | 0.353   | 2                    | 1 → 2        | round(2.471) |
+| 2         | 0.529   | 4                    | 2 → 4        | round(3.703) |
+| 3         | 0.568   | 4                    | 3 → 4        | round(3.976) |
+| 4         | 0.843   | 6                    | 4 → 6        | round(5.901) |
+| 5         | 0.863   | 6                    | 5 → 6        | round(6.041) |
+| 6         | 0.961   | 7                    | 6 → 7        | round(6.727) |
+| 7         | 1.000   | 7                    | 7 → 7        | round(7.000) |
+
+**🔄 Complete Mapping Function:**
 ```
-📐 Formula: s_k = round(CDF(k) × L)
-Dimana L = 7 (untuk 3-bit image: 0-7)
-
-📊 Perhitungan Transformasi:
-┌─────────┬─────────────────┬─────────────────────┬─────────────────────┐
-│ k (Input) │ CDF(k)          │ s_k = round(CDF(k)×7) │ Mapping Rule        │
-├─────────┼─────────────────┼─────────────────────┼─────────────────────┤
-│ 0       │ 0.196           │ round(1.372) = 1     │ 0 → 1               │
-│ 1       │ 0.353           │ round(2.471) = 2     │ 1 → 2               │
-│ 2       │ 0.529           │ round(3.703) = 4     │ 2 → 4               │
-│ 3       │ 0.568           │ round(3.976) = 4     │ 3 → 4               │
-│ 4       │ 0.843           │ round(5.901) = 6     │ 4 → 6               │
-│ 5       │ 0.863           │ round(6.041) = 6     │ 5 → 6               │
-│ 6       │ 0.961           │ round(6.727) = 7     │ 6 → 7               │
-│ 7       │ 1.000           │ round(7.000) = 7     │ 7 → 7               │
-└─────────┴─────────────────┴─────────────────────┴─────────────────────┘
-
-🔄 Complete Mapping Function:
 Input → Output:
 0 → 1
 1 → 2
@@ -1101,44 +1095,41 @@ Input → Output:
 
 ---
 
-#### **📊 Langkah 5: Equalized Histogram Visualization**
+#### **Q1: Langkah 5 - Visualisasi Histogram Equalized**
 
-```
-📊 Equalized Histogram:
-┌─────────┬─────────────────┬─────────────────────┬─────────────────────┐
-│ s (Output) │ Original Values  │ Count               │ Explanation         │
-├─────────┼─────────────────┼─────────────────────┼─────────────────────┤
-│ 0       │ -               │ 0                   │ Tidak ada nilai     │
-│ 1       │ 0               │ 10                  │ Dari r=0            │
-│ 2       │ 1               │ 8                   │ Dari r=1            │
-│ 3       │ -               │ 0                   │ Tidak ada nilai     │
-│ 4       │ 2, 3            │ 9 + 2 = 11          │ Dari r=2 dan r=3    │
-│ 5       │ -               │ 0                   │ Tidak ada nilai     │
-│ 6       │ 4, 5            │ 14 + 1 = 15         │ Dari r=4 dan r=5    │
-│ 7       │ 6, 7            │ 5 + 2 = 7           │ Dari r=6 dan r=7    │
-└─────────┴─────────────────┴─────────────────────┴─────────────────────┘
+**📊 Tabel Equalized Histogram:**
 
-📈 Analisis Hasil:
+| s (Output) | Original Values | Count | Explanation |
+|------------|-----------------|-------|-------------|
+| 0          | -               | 0     | Tidak ada nilai |
+| 1          | 0               | 10    | Dari r=0 |
+| 2          | 1               | 8     | Dari r=1 |
+| 3          | -               | 0     | Tidak ada nilai |
+| 4          | 2, 3            | 11    | Dari r=2 dan r=3 (9+2) |
+| 5          | -               | 0     | Tidak ada nilai |
+| 6          | 4, 5            | 15    | Dari r=4 dan r=5 (14+1) |
+| 7          | 6, 7            | 7     | Dari r=6 dan r=7 (5+2) |
+
+**📈 Analisis Hasil:**
 - Rentang output: [1, 7] (semua nilai 0-7 terpakai)
 - Distribusi lebih merata
-- Freq tertinggi: s=6 (15 piksel)
-- Freq terendah: s=1, s=2 (8-10 piksel)
-```
+- Frekuensi tertinggi: s=6 (15 piksel)
+- Frekuensi terendah: s=1, s=2 (8-10 piksel)
 
 ---
 
-#### **🎯 Kesimpulan Q1**
+#### **Q1: Kesimpulan dan Analisis Hasil**
 
 ✅ **Tujuan Tercapai:** Histogram equalization berhasil mendistribusikan intensitas lebih merata.
 
-📊 **Perbandingan:**
-- Original: Rentang terbatas pada nilai dominan
-- Equalized: Semua intensitas [0,7] terpakai dengan distribusi yang lebih uniform
+📊 **Perbandingan Sebelum dan Sesudah:**
+- **Original:** Rentang terbatas, konsentrasi pada nilai dominan
+- **Equalized:** Semua intensitas [0,7] terpakai dengan distribusi yang lebih uniform
 
-🔄 **Impact:**
+🔄 **Impact Visual:**
 - Kontras gambar meningkat secara signifikan
 - Detail pada area gelap dan terang lebih terlihat
-- Sering digunakan untuk image preprocessing
+- Sering digunakan untuk image preprocessing dalam computer vision
 
 ---
 
