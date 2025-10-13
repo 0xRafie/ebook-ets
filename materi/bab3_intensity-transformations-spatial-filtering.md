@@ -2,129 +2,160 @@
 
 ## Berdasarkan Bab 3: Intensity Transformations and Spatial Filtering
 
-# 📚 Daftar Isi Detail
+# 📚 Daftar Isi Lengkap
 
-## **Bagian 1: Konsep Fundamental**
-1. [Pendahuluan](#1-pendahuluan)
-   - Transformasi Intensitas (Point Processing)
-   - Filtering Spasial (Neighborhood Processing)
+## **📖 Bagian I: Konsep Fundamental Transformasi Intensitas dan Filtering Spasial**
 
-## **Bagian 2: Transformasi Intensitas Dasar**
-2. [Transformasi Intensitas Dasar](#2-transformasi-intensitas-dasar)
-   - [Fungsi Transformasi](#21-fungsi-transformasi)
-   - [Linear Transformation](#22-linear-transformation)
-     - Identity Transformation
-     - Negative Transformation
-     - Contrast Stretching
-   - [Logarithmic Transformation](#23-logarithmic-transformation)
-   - [Power-Law (Gamma) Transformation](#24-power-law-gamma-transformation)
-   - [Piecewise-Linear Transformation](#25-piecewise-linear-transformation)
+### **1. [Pendahuluan](#1-pendahuluan)**
+- 1.1 [Transformasi Intensitas (Point Processing)](#11-transformasi-intensitas-point-processing)
+- 1.2 [Filtering Spasial (Neighborhood Processing)](#12-filtering-spasial-neighborhood-processing)
 
-## **Bagian 3: Histogram Processing**
-3. [Histogram Processing](#3-histogram-processing)
-   - [Histogram Definition](#31-histogram-definition)
-   - [Normalized Histogram](#32-normalized-histogram)
-   - [Histogram Equalization](#33-histogram-equalization)
-   - [Histogram Matching (Specification)](#34-histogram-matching-specification)
-   - [Local Histogram Processing](#35-local-histogram-processing)
+### **2. [Transformasi Intensitas Dasar](#2-transformasi-intensitas-dasar)**
+- 2.1 [Fungsi Transformasi](#21-fungsi-transformasi)
+  - 2.1.1 Notasi Matematis Transformasi
+  - 2.1.2 Domain dan Range Transformasi
+- 2.2 [Linear Transformation](#22-linear-transformation)
+  - 2.2.1 [Identity Transformation](#221-identity-transformation)
+  - 2.2.2 [Negative Transformation](#222-negative-transformation)
+  - 2.2.3 [Contrast Stretching](#223-contrast-stretching)
+- 2.3 [Logarithmic Transformation](#23-logarithmic-transformation)
+  - 2.3.1 Formula dan Konstanta Scaling
+  - 2.3.2 Aplikasi pada Citra Dynamic Range Tinggi
+- 2.4 [Power-Law (Gamma) Transformation](#24-power-law-gamma-transformation)
+  - 2.4.1 Variasi Nilai Gamma
+  - 2.4.2 Gamma Correction pada Display Devices
+- 2.5 [Piecewise-Linear Transformation](#25-piecewise-linear-transformation)
+  - 2.5.1 Contrast Stretching
+  - 2.5.2 Thresholding
+  - 2.5.3 Gray-Level Slicing
 
-## **Bagian 4: Filtering Spasial**
-4. [Spatial Filtering](#4-spatial-filtering)
-   - [Fundamental Concepts](#41-fundamental-concepts)
-   - [Convolution Operation](#42-convolution-operation)
-   - [Smoothing Linear Filters](#43-smoothing-linear-filters)
-     - Box Filter (Mean Filter)
-     - Weighted Average Filter
-     - Gaussian Filter
-   - [Sharpening Linear Filters](#44-sharpening-linear-filters)
-     - Laplacian Filter
-     - Unsharp Masking
-     - High-Boost Filtering
+### **3. [Histogram Processing](#3-histogram-processing)**
+- 3.1 [Histogram Definition](#31-histogram-definition)
+- 3.2 [Normalized Histogram](#32-normalized-histogram)
+- 3.3 [Histogram Equalization](#33-histogram-equalization)
+  - 3.3.1 Algoritma dan Implementasi
+  - 3.3.2 Properties dan Karakteristik
+- 3.4 [Histogram Matching (Specification)](#34-histogram-matching-specification)
+  - 3.4.1 Proses Mapping
+  - 3.4.2 Aplikasi Praktis
+- 3.5 [Local Histogram Processing](#35-local-histogram-processing)
 
-## **Bagian 5: Filter Statistik dan Gradien**
-5. [Order-Statistics Filters](#5-order-statistics-filters)
-   - [Median Filter](#51-median-filter)
-   - [Variations](#52-variations)
-     - Max Filter
-     - Min Filter
-     - Midpoint Filter
-     - Alpha-Trimmed Mean Filter
+## **📖 Bagian II: Teknik Filtering Spasial**
 
-6. [Gradient-Based Filters](#6-gradient-based-filters)
-   - [First-Order Derivatives](#61-first-order-derivatives)
-     - Sobel Operator
-     - Prewitt Operator
-     - Roberts Cross-Gradient
-   - [Second-Order Derivatives](#62-second-order-derivatives)
-     - Laplacian of Gaussian (LoG)
+### **4. [Spatial Filtering](#4-spatial-filtering)**
+- 4.1 [Fundamental Concepts](#41-fundamental-concepts)
+  - 4.1.1 Filter Mask/Kernel
+  - 4.1.2 Anchor Point dan Neighborhood
+- 4.2 [Convolution Operation](#42-convolution-operation)
+  - 4.2.1 Matematis Formula
+  - 4.2.2 Boundary Handling
+- 4.3 [Smoothing Linear Filters](#43-smoothing-linear-filters)
+  - 4.3.1 [Box Filter (Mean Filter)](#431-box-filter-mean-filter)
+  - 4.3.2 [Weighted Average Filter](#432-weighted-average-filter)
+  - 4.3.3 [Gaussian Filter](#433-gaussian-filter)
+- 4.4 [Sharpening Linear Filters](#44-sharpening-linear-filters)
+  - 4.4.1 [Laplacian Filter](#441-laplacian-filter)
+  - 4.4.2 [Unsharp Masking](#442-unsharp-masking)
+  - 4.4.3 [High-Boost Filtering](#443-high-boost-filtering)
 
-## **Bagian 6: Filter Adaptif**
-7. [Adaptive Filters](#7-adaptive-filters)
-   - [Adaptive Median Filter](#71-adaptive-median-filter)
-   - [Adaptive Local Noise Reduction](#72-adaptive-local-noise-reduction)
+### **5. [Order-Statistics Filters](#5-order-statistics-filters)**
+- 5.1 [Median Filter](#51-median-filter)
+- 5.2 [Variations](#52-variations)
+  - 5.2.1 [Max Filter](#521-max-filter)
+  - 5.2.2 [Min Filter](#522-min-filter)
+  - 5.2.3 [Midpoint Filter](#523-midpoint-filter)
+  - 5.2.4 [Alpha-Trimmed Mean Filter](#524-alpha-trimmed-mean-filter)
 
-## **Bagian 7: Citra Warna**
-8. [Transformations for Color Images](#8-transformations-for-color-images)
-   - [Color Space Considerations](#81-color-space-considerations)
-     - RGB Space
-     - HSI/HSV Space
-     - YCbCr Space
-   - [Color Enhancement Techniques](#82-color-enhancement-techniques)
+### **6. [Gradient-Based Filters](#6-gradient-based-filters)**
+- 6.1 [First-Order Derivatives](#61-first-order-derivatives)
+  - 6.1.1 [Sobel Operator](#611-sobel-operator)
+  - 6.1.2 [Prewitt Operator](#612-prewitt-operator)
+  - 6.1.3 [Roberts Cross-Gradient](#613-roberts-cross-gradient)
+- 6.2 [Second-Order Derivatives](#62-second-order-derivatives)
+  - 6.2.1 [Laplacian of Gaussian (LoG)](#621-laplacian-of-gaussian-log)
 
-## **Bagian 8: Implementasi & Aplikasi**
-9. [Implementation Considerations](#9-implementation-considerations)
-   - [Computational Complexity](#91-computational-complexity)
-   - [Boundary Handling](#92-boundary-handling)
-   - [Hardware Acceleration](#93-hardware-acceleration)
+### **7. [Adaptive Filters](#7-adaptive-filters)**
+- 7.1 [Adaptive Median Filter](#71-adaptive-median-filter)
+- 7.2 [Adaptive Local Noise Reduction](#72-adaptive-local-noise-reduction)
 
-10. [Applications](#10-applications)
-    - [Medical Imaging](#101-medical-imaging)
-    - [Remote Sensing](#102-remote-sensing)
-    - [Computer Vision](#103-computer-vision)
-    - [Photography](#104-photography)
+## **📖 Bagian III: Aplikasi Lanjutan**
 
-11. [Advanced Topics](#11-advanced-topics)
-    - [Multi-scale Filtering](#111-multi-scale-filtering)
-    - [Anisotropic Filtering](#112-anisotropic-filtering)
-    - [Deep Learning Approaches](#113-deep-learning-approaches)
+### **8. [Transformations for Color Images](#8-transformations-for-color-images)**
+- 8.1 [Color Space Considerations](#81-color-space-considerations)
+  - 8.1.1 RGB Space
+  - 8.1.2 HSI/HSV Space
+  - 8.1.3 YCbCr Space
+- 8.2 [Color Enhancement Techniques](#82-color-enhancement-techniques)
 
-## **Bagian 9: Evaluasi Performa**
-12. [Performance Evaluation](#12-performance-evaluation)
-    - [Quality Metrics](#121-quality-metrics)
-      - Mean Squared Error (MSE)
-      - Peak Signal-to-Noise Ratio (PSNR)
-      - Structural Similarity Index (SSIM)
-    - [Visual Assessment](#122-visual-assessment)
+### **9. [Implementation Considerations](#9-implementation-considerations)**
+- 9.1 [Computational Complexity](#91-computational-complexity)
+- 9.2 [Boundary Handling](#92-boundary-handling)
+- 9.3 [Hardware Acceleration](#93-hardware-acceleration)
 
-## **📖 Bagian 10: Latihan Praktis**
+### **10. [Applications](#10-applications)**
+- 10.1 [Medical Imaging](#101-medical-imaging)
+- 10.2 [Remote Sensing](#102-remote-sensing)
+- 10.3 [Computer Vision](#103-computer-vision)
+- 10.4 [Photography](#104-photography)
 
-### **Latihan Dasar (Soal 3.1 - 3.3)**
+### **11. [Advanced Topics](#11-advanced-topics)**
+- 11.1 [Multi-scale Filtering](#111-multi-scale-filtering)
+- 11.2 [Anisotropic Filtering](#112-anisotropic-filtering)
+- 11.3 [Deep Learning Approaches](#113-deep-learning-approaches)
+
+### **12. [Performance Evaluation](#12-performance-evaluation)**
+- 12.1 [Quality Metrics](#121-quality-metrics)
+  - 12.1.1 Mean Squared Error (MSE)
+  - 12.1.2 Peak Signal-to-Noise Ratio (PSNR)
+  - 12.1.3 Structural Similarity Index (SSIM)
+- 12.2 [Visual Assessment](#122-visual-assessment)
+
+---
+
+## **🎯 Bagian IV: Latihan Praktis dan Studi Kasus**
+
+### **📝 Latihan Dasar (Soal 3.1 - 3.3)**
 - [Soal 3.1: Transformasi Intensitas Dasar](#soal-31-transformasi-intensitas-dasar)
 - [Soal 3.2: Histogram Processing](#soal-32-histogram-processing)
 - [Soal 3.3: Spatial Filtering untuk Noise Reduction](#soal-33-spatial-filtering-untuk-noise-reduction)
 
-### **Latihan Implementasi (Soal 3.4 - 3.6)**
+### **💻 Latihan Implementasi (Soal 3.4 - 3.6)**
 - [Soal 3.4: Transformasi Intensitas dengan Matriks Konkret](#soal-34-transformasi-intensitas-dengan-matriks-konkret)
 - [Soal 3.5: Histogram Equalization dengan Data Numerik](#soal-35-histogram-equalization-dengan-data-numerik)
 - [Soal 3.6: Spatial Filtering dengan Operasi Konvolusi](#soal-36-spatial-filtering-dengan-operasi-konvolusi)
 
-### **Latihan Lanjutan (Soal 3.7 - 3.10)**
+### **🚀 Latihan Lanjutan (Soal 3.7 - 3.10)**
 - [Soal 3.7: Piecewise-Linear Transformations](#soal-37-piecewise-linear-transformations)
 - [Soal 3.8: Adaptive Histogram Equalization](#soal-38-adaptive-histogram-equalization)
 - [Soal 3.9: Pemilihan Filter untuk Aplikasi Spesifik](#soal-39-pemilihan-filter-untuk-aplikasi-spesifik)
 - [Soal 3.10: Evaluasi Kinerja Filter](#soal-310-evaluasi-kinerja-filter)
 
-### **📝 Soal Tambahan Terstruktur**
-- [Q1: Histogram Equalization](#q1-histogram-equalization)
-  - Persiapan Data
-  - Implementasi PMF
-  - Implementasi CDF
-  - Hasil Equalization
-- [Q2: Convolution and Correlation](#q2-convolution-and-correlation)
-  - Analisis Masukan
-  - Perhitungan Konvolusi
-  - Perhitungan Korelasi
-  - Interpretasi Hasil
+---
+
+## **🔬 Bagian V: Soal Struktural Terperinci**
+
+### **📊 Q1: Histogram Equalization pada Citra 3-bit**
+- [Deskripsi Soal](#q1-deskripsi-soal)
+- [Data Input dan Analisis Awal](#q1-data-input-dan-analisis-awal)
+- [Langkah 1: Visualisasi Histogram](#q1-langkah-1-visualisasi-histogram)
+- [Langkah 2: Perhitungan PMF](#q1-langkah-2-perhitungan-pmf)
+- [Langkah 3: Perhitungan CDF](#q1-langkah-3-perhitungan-cdf)
+- [Langkah 4: Transformasi Equalization](#q1-langkah-4-transformasi-equalization)
+- [Langkah 5: Visualisasi Histogram Equalized](#q1-langkah-5-visualisasi-histogram-equalized)
+- [Kesimpulan dan Analisis Hasil](#q1-kesimpulan-dan-analisis-hasil)
+
+### **🔧 Q2: Operasi Konvolusi dan Korelasi**
+- [Deskripsi Soal](#q2-deskripsi-soal)
+- [Analisis Matriks Input](#q2-analisis-matriks-input)
+- [Case Q2a: Convolution w ★ fₐ](#case-q2a-convolution-w--fa)
+  - [Perhitungan Detil Konvolusi](#perhitungan-detil-konvolusi)
+  - [Interpretasi Hasil Konvolusi](#interpretasi-hasil-konvolusi)
+- [Case Q2a: Correlation w ☆ fₐ](#case-q2a-correlation-w--fa)
+  - [Perhitungan Detil Korelasi](#perhitungan-detil-korelasi)
+  - [Interpretasi Hasil Korelasi](#interpretasi-hasil-korelasi)
+- [Case Q2b: Convolution w ★ f₆](#case-q2b-convolution-w--fb)
+- [Case Q2b: Correlation w ☆ f₆](#case-q2b-correlation-w--fb)
+- [Perbandingan Komprehensif dan Kesimpulan](#perbandingan-komprehensif-dan-kesimpulan)
 
 ## **🎯 Kesimpulan**
 
