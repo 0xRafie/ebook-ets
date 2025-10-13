@@ -2,77 +2,131 @@
 
 ## Berdasarkan Bab 3: Intensity Transformations and Spatial Filtering
 
-## Daftar Isi
+# 📚 Daftar Isi Detail
 
+## **Bagian 1: Konsep Fundamental**
 1. [Pendahuluan](#1-pendahuluan)
-   - Transformasi Intensitas
-   - Filtering Spasial
+   - Transformasi Intensitas (Point Processing)
+   - Filtering Spasial (Neighborhood Processing)
 
+## **Bagian 2: Transformasi Intensitas Dasar**
 2. [Transformasi Intensitas Dasar](#2-transformasi-intensitas-dasar)
-   - Fungsi Transformasi
-   - Linear Transformation
-   - Logarithmic Transformation
-   - Power-Law (Gamma) Transformation
-   - Piecewise-Linear Transformation
+   - [Fungsi Transformasi](#21-fungsi-transformasi)
+   - [Linear Transformation](#22-linear-transformation)
+     - Identity Transformation
+     - Negative Transformation
+     - Contrast Stretching
+   - [Logarithmic Transformation](#23-logarithmic-transformation)
+   - [Power-Law (Gamma) Transformation](#24-power-law-gamma-transformation)
+   - [Piecewise-Linear Transformation](#25-piecewise-linear-transformation)
 
+## **Bagian 3: Histogram Processing**
 3. [Histogram Processing](#3-histogram-processing)
-   - Histogram Definition
-   - Normalized Histogram
-   - Histogram Equalization
-   - Histogram Matching
-   - Local Histogram Processing
+   - [Histogram Definition](#31-histogram-definition)
+   - [Normalized Histogram](#32-normalized-histogram)
+   - [Histogram Equalization](#33-histogram-equalization)
+   - [Histogram Matching (Specification)](#34-histogram-matching-specification)
+   - [Local Histogram Processing](#35-local-histogram-processing)
 
+## **Bagian 4: Filtering Spasial**
 4. [Spatial Filtering](#4-spatial-filtering)
-   - Fundamental Concepts
-   - Convolution Operation
-   - Smoothing Linear Filters
-   - Sharpening Linear Filters
+   - [Fundamental Concepts](#41-fundamental-concepts)
+   - [Convolution Operation](#42-convolution-operation)
+   - [Smoothing Linear Filters](#43-smoothing-linear-filters)
+     - Box Filter (Mean Filter)
+     - Weighted Average Filter
+     - Gaussian Filter
+   - [Sharpening Linear Filters](#44-sharpening-linear-filters)
+     - Laplacian Filter
+     - Unsharp Masking
+     - High-Boost Filtering
 
+## **Bagian 5: Filter Statistik dan Gradien**
 5. [Order-Statistics Filters](#5-order-statistics-filters)
-   - Median Filter
-   - Variations (Max, Min, Midpoint, Alpha-Trimmed)
+   - [Median Filter](#51-median-filter)
+   - [Variations](#52-variations)
+     - Max Filter
+     - Min Filter
+     - Midpoint Filter
+     - Alpha-Trimmed Mean Filter
 
 6. [Gradient-Based Filters](#6-gradient-based-filters)
-   - First-Order Derivatives (Sobel, Prewitt, Roberts)
-   - Second-Order Derivatives (Laplacian of Gaussian)
+   - [First-Order Derivatives](#61-first-order-derivatives)
+     - Sobel Operator
+     - Prewitt Operator
+     - Roberts Cross-Gradient
+   - [Second-Order Derivatives](#62-second-order-derivatives)
+     - Laplacian of Gaussian (LoG)
 
+## **Bagian 6: Filter Adaptif**
 7. [Adaptive Filters](#7-adaptive-filters)
-   - Adaptive Median Filter
-   - Adaptive Local Noise Reduction
+   - [Adaptive Median Filter](#71-adaptive-median-filter)
+   - [Adaptive Local Noise Reduction](#72-adaptive-local-noise-reduction)
 
+## **Bagian 7: Citra Warna**
 8. [Transformations for Color Images](#8-transformations-for-color-images)
-   - Color Space Considerations
-   - Color Enhancement Techniques
+   - [Color Space Considerations](#81-color-space-considerations)
+     - RGB Space
+     - HSI/HSV Space
+     - YCbCr Space
+   - [Color Enhancement Techniques](#82-color-enhancement-techniques)
 
+## **Bagian 8: Implementasi & Aplikasi**
 9. [Implementation Considerations](#9-implementation-considerations)
-   - Computational Complexity
-   - Boundary Handling
-   - Hardware Acceleration
+   - [Computational Complexity](#91-computational-complexity)
+   - [Boundary Handling](#92-boundary-handling)
+   - [Hardware Acceleration](#93-hardware-acceleration)
 
 10. [Applications](#10-applications)
-    - Medical Imaging
-    - Remote Sensing
-    - Computer Vision
-    - Photography
+    - [Medical Imaging](#101-medical-imaging)
+    - [Remote Sensing](#102-remote-sensing)
+    - [Computer Vision](#103-computer-vision)
+    - [Photography](#104-photography)
 
 11. [Advanced Topics](#11-advanced-topics)
-    - Multi-scale Filtering
-    - Anisotropic Filtering
-    - Deep Learning Approaches
+    - [Multi-scale Filtering](#111-multi-scale-filtering)
+    - [Anisotropic Filtering](#112-anisotropic-filtering)
+    - [Deep Learning Approaches](#113-deep-learning-approaches)
 
+## **Bagian 9: Evaluasi Performa**
 12. [Performance Evaluation](#12-performance-evaluation)
-    - Quality Metrics
-    - Visual Assessment
+    - [Quality Metrics](#121-quality-metrics)
+      - Mean Squared Error (MSE)
+      - Peak Signal-to-Noise Ratio (PSNR)
+      - Structural Similarity Index (SSIM)
+    - [Visual Assessment](#122-visual-assessment)
 
-13. [Latihan Soal dan Jawaban](#13-latihan-soal-dan-jawaban)
-    - Soal 3.1: Transformasi Intensitas Dasar
-    - Soal 3.2: Histogram Processing
-    - Soal 3.3: Spatial Filtering untuk Noise Reduction
-    - Soal 3.4: Transformasi Intensitas dengan Matriks Konkret
-    - Soal 3.5: Histogram Equalization dengan Data Numerik
-    - Soal 3.6: Spatial Filtering dengan Operasi Konvolusi
+## **📖 Bagian 10: Latihan Praktis**
 
-14. [Kesimpulan](#kesimpulan)
+### **Latihan Dasar (Soal 3.1 - 3.3)**
+- [Soal 3.1: Transformasi Intensitas Dasar](#soal-31-transformasi-intensitas-dasar)
+- [Soal 3.2: Histogram Processing](#soal-32-histogram-processing)
+- [Soal 3.3: Spatial Filtering untuk Noise Reduction](#soal-33-spatial-filtering-untuk-noise-reduction)
+
+### **Latihan Implementasi (Soal 3.4 - 3.6)**
+- [Soal 3.4: Transformasi Intensitas dengan Matriks Konkret](#soal-34-transformasi-intensitas-dengan-matriks-konkret)
+- [Soal 3.5: Histogram Equalization dengan Data Numerik](#soal-35-histogram-equalization-dengan-data-numerik)
+- [Soal 3.6: Spatial Filtering dengan Operasi Konvolusi](#soal-36-spatial-filtering-dengan-operasi-konvolusi)
+
+### **Latihan Lanjutan (Soal 3.7 - 3.10)**
+- [Soal 3.7: Piecewise-Linear Transformations](#soal-37-piecewise-linear-transformations)
+- [Soal 3.8: Adaptive Histogram Equalization](#soal-38-adaptive-histogram-equalization)
+- [Soal 3.9: Pemilihan Filter untuk Aplikasi Spesifik](#soal-39-pemilihan-filter-untuk-aplikasi-spesifik)
+- [Soal 3.10: Evaluasi Kinerja Filter](#soal-310-evaluasi-kinerja-filter)
+
+### **📝 Soal Tambahan Terstruktur**
+- [Q1: Histogram Equalization](#q1-histogram-equalization)
+  - Persiapan Data
+  - Implementasi PMF
+  - Implementasi CDF
+  - Hasil Equalization
+- [Q2: Convolution and Correlation](#q2-convolution-and-correlation)
+  - Analisis Masukan
+  - Perhitungan Konvolusi
+  - Perhitungan Korelasi
+  - Interpretasi Hasil
+
+## **🎯 Kesimpulan**
 
 ## 1. Pendahuluan
 
@@ -884,86 +938,126 @@ Tidak ada satu filter yang universal terbaik. Pilihan filter harus didasarkan pa
 
 ---
 
-### Soal Latihan Tambahan
+## 📝 **Soal Tambahan Terstruktur**
 
-#### Soal Q1: Histogram Equalization
+### **📊 Q1: Histogram Equalization (3-bit Image)**
 
-**Pertanyaan:**
-Kita memiliki citra dengan 3 bit/pixel, sehingga rentang nilai yang mungkin adalah 0 hingga 7, dengan distribusi berikut:
+#### **🎯 Deskripsi Soal**
+Diberikan citra dengan 3 bit/pixel, sehingga rentang nilai yang mungkin adalah 0 hingga 7, dengan distribusi berikut:
 
 | Gray-level value | 0  | 1 | 2 | 3 | 4  | 5 | 6 | 7 |
 | :--------------- | :- | :- | :- | :- | :- | :- | :- | :- |
 | No of Pixel (Histogram value) | 10 | 8 | 9 | 2 | 14 | 1 | 5 | 2 |
 
-a. Gambar histogram.
-b. Dapatkan nilai histogram yang di-equalized.
-c. Gambar histogram yang di-equalized.
+**Tugas:**
+- a. Gambar histogram
+- b. Dapatkan nilai histogram yang di-equalized
+- c. Gambar histogram yang di-equalized
 
-**Jawaban:**
+---
 
-**Data Input:**
+#### **📋 Persiapan Data**
+```
+📊 Data Input:
 - Citra dengan 3 bit/pixel (nilai intensitas 0-7)
 - Total piksel = 10 + 8 + 9 + 2 + 14 + 1 + 5 + 2 = 51
-
-**a. Histogram**
-```
-Histogram
-Value | Frequency
-0     | 10
-1     | 8
-2     | 9
-3     | 2
-4     | 14
-5     | 1
-6     | 5
-7     | 2
 ```
 
-**b. Nilai Equalized Histogram**
+---
 
-**Langkah 1: Hitung PMF (Probability Mass Function)**
-```
-PMF(r) = histogram(r) / total_piksel
+#### **📈 Langkah 1: Histogram Visualization**
 
-PMF(0) = 10/51 = 0.196
-PMF(1) = 8/51 = 0.157
-PMF(2) = 9/51 = 0.176
-PMF(3) = 2/51 = 0.039
-PMF(4) = 14/51 = 0.275
-PMF(5) = 1/51 = 0.020
-PMF(6) = 5/51 = 0.098
-PMF(7) = 2/51 = 0.039
 ```
+📊 Original Histogram:
+| Value | Frequency | Percentage |
+|-------|-----------|------------|
+| 0     | 10        | 19.6%      |
+| 1     | 8         | 15.7%      |
+| 2     | 9         | 17.6%      |
+| 3     | 2         | 3.9%       |
+| 4     | 14        | 27.5%      |
+| 5     | 1         | 2.0%       |
+| 6     | 5         | 9.8%       |
+| 7     | 2         | 3.9%       |
 
-**Langkah 2: Hitung CDF (Cumulative Distribution Function)**
-```
-CDF(0) = PMF(0) = 0.196
-CDF(1) = CDF(0) + PMF(1) = 0.196 + 0.157 = 0.353
-CDF(2) = CDF(1) + PMF(2) = 0.353 + 0.176 = 0.529
-CDF(3) = CDF(2) + PMF(3) = 0.529 + 0.039 = 0.568
-CDF(4) = CDF(3) + PMF(4) = 0.568 + 0.275 = 0.843
-CDF(5) = CDF(4) + PMF(5) = 0.843 + 0.020 = 0.863
-CDF(6) = CDF(5) + PMF(6) = 0.863 + 0.098 = 0.961
-CDF(7) = CDF(6) + PMF(7) = 0.961 + 0.039 = 1.000
+📈 Analisis Distribusi:
+- Nilai dominan: 4 (27.5%)
+- Nilai langka: 3, 5, 7 (3.9% - 2.0%)
+- Rentang nilai: [0, 7]
 ```
 
-**Langkah 3: Hitung nilai equalized**
-```
-s_k = round(CDF(k) × 7)  [karena 3-bit range: 0-7]
+---
 
-s(0) = round(0.196 × 7) = round(1.372) = 1
-s(1) = round(0.353 × 7) = round(2.471) = 2
-s(2) = round(0.529 × 7) = round(3.703) = 4
-s(3) = round(0.568 × 7) = round(3.976) = 4
-s(4) = round(0.843 × 7) = round(5.901) = 6
-s(5) = round(0.863 × 7) = round(6.041) = 6
-s(6) = round(0.961 × 7) = round(6.727) = 7
-s(7) = round(1.000 × 7) = round(7.000) = 7
+#### **🔢 Langkah 2: PMF (Probability Mass Function) Calculation**
+
+```
+📐 Formula: PMF(r) = histogram(r) / total_piksel
+
+📊 Perhitungan PMF:
+┌─────────┬─────────────────┬─────────────────────┐
+│ r (Input) │ h(r) (Frequency) │ PMF(r) Probability │
+├─────────┼─────────────────┼─────────────────────┤
+│ 0       │ 10              │ 10/51 = 0.196       │
+│ 1       │ 8               │ 8/51 = 0.157        │
+│ 2       │ 9               │ 9/51 = 0.176        │
+│ 3       │ 2               │ 2/51 = 0.039        │
+│ 4       │ 14              │ 14/51 = 0.275       │
+│ 5       │ 1               │ 1/51 = 0.020        │
+│ 6       │ 5               │ 5/51 = 0.098        │
+│ 7       │ 2               │ 2/51 = 0.039        │
+└─────────┴─────────────────┴─────────────────────┘
+
+✅ Verifikasi: ΣPMF(r) = 0.196 + 0.157 + 0.176 + 0.039 + 0.275 + 0.020 + 0.098 + 0.039 = 1.000
 ```
 
-**Hasil Equalized Histogram Values:**
+---
+
+#### **📊 Langkah 3: CDF (Cumulative Distribution Function) Calculation**
+
 ```
-Input → Output mapping:
+📐 Formula: CDF(k) = Σ_{i=0}^{k} PMF(i)
+
+📊 Perhitungan CDF:
+┌─────────┬─────────────────┬─────────────────────┬─────────────────────┐
+│ k (Level) │ PMF(k)         │ CDF(k) Cumulative    │ Explanation         │
+├─────────┼─────────────────┼─────────────────────┼─────────────────────┤
+│ 0       │ 0.196           │ 0.196               │ PMF(0)              │
+│ 1       │ 0.157           │ 0.196 + 0.157 = 0.353 │ CDF(0) + PMF(1)   │
+│ 2       │ 0.176           │ 0.353 + 0.176 = 0.529 │ CDF(1) + PMF(2)   │
+│ 3       │ 0.039           │ 0.529 + 0.039 = 0.568 │ CDF(2) + PMF(3)   │
+│ 4       │ 0.275           │ 0.568 + 0.275 = 0.843 │ CDF(3) + PMF(4)   │
+│ 5       │ 0.020           │ 0.843 + 0.020 = 0.863 │ CDF(4) + PMF(5)   │
+│ 6       │ 0.098           │ 0.863 + 0.098 = 0.961 │ CDF(5) + PMF(6)   │
+│ 7       │ 0.039           │ 0.961 + 0.039 = 1.000 │ CDF(6) + PMF(7)   │
+└─────────┴─────────────────┴─────────────────────┴─────────────────────┘
+
+✅ Verifikasi: CDF(7) = 1.000 (Valid)
+```
+
+---
+
+#### **🎯 Langkah 4: Transformasi Equalization**
+
+```
+📐 Formula: s_k = round(CDF(k) × L)
+Dimana L = 7 (untuk 3-bit image: 0-7)
+
+📊 Perhitungan Transformasi:
+┌─────────┬─────────────────┬─────────────────────┬─────────────────────┐
+│ k (Input) │ CDF(k)          │ s_k = round(CDF(k)×7) │ Mapping Rule        │
+├─────────┼─────────────────┼─────────────────────┼─────────────────────┤
+│ 0       │ 0.196           │ round(1.372) = 1     │ 0 → 1               │
+│ 1       │ 0.353           │ round(2.471) = 2     │ 1 → 2               │
+│ 2       │ 0.529           │ round(3.703) = 4     │ 2 → 4               │
+│ 3       │ 0.568           │ round(3.976) = 4     │ 3 → 4               │
+│ 4       │ 0.843           │ round(5.901) = 6     │ 4 → 6               │
+│ 5       │ 0.863           │ round(6.041) = 6     │ 5 → 6               │
+│ 6       │ 0.961           │ round(6.727) = 7     │ 6 → 7               │
+│ 7       │ 1.000           │ round(7.000) = 7     │ 7 → 7               │
+└─────────┴─────────────────┴─────────────────────┴─────────────────────┘
+
+🔄 Complete Mapping Function:
+Input → Output:
 0 → 1
 1 → 2
 2 → 4
@@ -974,102 +1068,192 @@ Input → Output mapping:
 7 → 7
 ```
 
-**c. Histogram Equalized**
+---
+
+#### **📊 Langkah 5: Equalized Histogram Visualization**
+
 ```
-Equalized Histogram
-Value | Frequency
-0     | 0
-1     | 10
-2     | 8
-3     | 0
-4     | 11 (9+2)
-5     | 0
-6     | 15 (14+1)
-7     | 7 (5+2)
+📊 Equalized Histogram:
+┌─────────┬─────────────────┬─────────────────────┬─────────────────────┐
+│ s (Output) │ Original Values  │ Count               │ Explanation         │
+├─────────┼─────────────────┼─────────────────────┼─────────────────────┤
+│ 0       │ -               │ 0                   │ Tidak ada nilai     │
+│ 1       │ 0               │ 10                  │ Dari r=0            │
+│ 2       │ 1               │ 8                   │ Dari r=1            │
+│ 3       │ -               │ 0                   │ Tidak ada nilai     │
+│ 4       │ 2, 3            │ 9 + 2 = 11          │ Dari r=2 dan r=3    │
+│ 5       │ -               │ 0                   │ Tidak ada nilai     │
+│ 6       │ 4, 5            │ 14 + 1 = 15         │ Dari r=4 dan r=5    │
+│ 7       │ 6, 7            │ 5 + 2 = 7           │ Dari r=6 dan r=7    │
+└─────────┴─────────────────┴─────────────────────┴─────────────────────┘
+
+📈 Analisis Hasil:
+- Rentang output: [1, 7] (semua nilai 0-7 terpakai)
+- Distribusi lebih merata
+- Freq tertinggi: s=6 (15 piksel)
+- Freq terendah: s=1, s=2 (8-10 piksel)
 ```
 
-#### Soal Q2: Convolution and Correlation
+---
 
-**Pertanyaan:**
+#### **🎯 Kesimpulan Q1**
+
+✅ **Tujuan Tercapai:** Histogram equalization berhasil mendistribusikan intensitas lebih merata.
+
+📊 **Perbandingan:**
+- Original: Rentang terbatas pada nilai dominan
+- Equalized: Semua intensitas [0,7] terpakai dengan distribusi yang lebih uniform
+
+🔄 **Impact:**
+- Kontras gambar meningkat secara signifikan
+- Detail pada area gelap dan terang lebih terlihat
+- Sering digunakan untuk image preprocessing
+
+---
+
+### **🔧 Q2: Convolution and Correlation**
+
+#### **🎯 Deskripsi Soal**
 Hitung konvolusi `w ★ f` dan korelasi `w ☆ f` menggunakan zero padding minimal yang diperlukan.
 
-**a.**
-```
-     | 1  2  1 |         | 0  0  0  0  0 |
-w =  | 2  4  2 |      f =  | 0  0  1  0  0 |
-     | 1  2  1 |         | 0  0  1  0  0 |
-                       | 0  0  1  0  0 |
-                       | 0  0  0  0  0 |
-```
+**Matrix Input:**
+- **w**: 3×3 Gaussian Kernel
+- **f_a**: 5×5 Matrix dengan pola spesifik (nilai 1 di kolom ke-3)
+- **f_b**: 5×5 Matrix full of ones
 
-**b.**
-```
-     | 1  2  1 |         | 1  1  1  1  1 |
-w =  | 2  4  2 |      f =  | 1  1  1  1  1 |
-     | 1  2  1 |         | 1  1  1  1  1 |
-                       | 1  1  1  1  1 |
-                       | 1  1  1  1  1 |
-```
+---
 
-**Jawaban:**
+#### **📋 Analisis Masukan**
 
-### **Q2a**
-
-**w =**
+**A. Gaussian Kernel w:**
 ```
-| 1  2  1 |
-| 2  4  2 |
-| 1  2  1 |
+🔄 w = | 1  2  1 |
+       | 2  4  2 |
+       | 1  2  1 |
+
+💡 Properties:
+- Weighted average filter (Gaussian-like)
+- Center weight: 4 (highest)
+- Sum = 16 (normalization factor)
+- Symmetrical distribution
 ```
 
-**f =**
+**B. Input Matrix f_a:**
 ```
-| 0  0  0  0  0 |
-| 0  0  1  0  0 |
-| 0  0  1  0  0 |
-| 0  0  1  0  0 |
-| 0  0  0  0  0 |
-```
+🎯 f_a = | 0  0  0  0  0 |
+         | 0  0  1  0  0 |
+         | 0  0  1  0  0 |
+         | 0  0  1  0  0 |
+         | 0  0  0  0  0 |
 
-#### **Convolution w ★ f**
-
-**Ukuran Result = (5-3+1) × (5-3+1) = 3 × 3**
-
-**Perhitungan Konvolusi:**
-```
-(1,1): 1×0 + 2×0 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 0
-(1,2): 1×0 + 2×0 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 0
-(1,3): 1×0 + 2×0 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 0
-
-(2,1): 1×0 + 2×0 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 0
-(2,2): 1×0 + 2×0 + 1×0 + 2×0 + 4×1 + 2×0 + 1×0 + 2×0 + 1×0 = 4
-(2,3): 1×0 + 2×1 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 2
-
-(3,1): 1×0 + 2×0 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 0
-(3,2): 1×0 + 2×0 + 1×0 + 2×0 + 4×1 + 2×0 + 1×0 + 2×0 + 1×0 = 4
-(3,3): 1×0 + 2×1 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 2
+📍 Characteristics:
+- Vertical line of 1's at column 3
+- Sparse distribution
+- Edge detection test pattern
 ```
 
-**w ★ f =**
+**C. Input Matrix f_b:**
 ```
+⚡ f_b = | 1  1  1  1  1 |
+         | 1  1  1  1  1 |
+         | 1  1  1  1  1 |
+         | 1  1  1  1  1 |
+         | 1  1  1  1  1 |
+
+🔥 Properties:
+- Uniform intensity distribution
+- Constant value throughout
+- Response test for averaging
+```
+
+---
+
+#### **🧮 Case Q2a: Convolution w ★ f_a**
+
+**📐 Convolution Formula:**
+```
+g(x,y) = Σ_{s=-1}^{1} Σ_{t=-1}^{1} w(s,t) × f(x+s, y+t)
+```
+
+**🔢 Dimension Calculation:**
+- Input: 5×5
+- Kernel: 3×3
+- Output: (5-3+1) × (5-3+1) = 3×3
+
+**🎯 Detailed Calculation:**
+
+```
+📍 Position (1,1):
+∑ = 1×0 + 2×0 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 0
+
+📍 Position (1,2):
+∑ = 1×0 + 2×0 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 0
+
+📍 Position (1,3):
+∑ = 1×0 + 2×0 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 0
+
+📍 Position (2,1):
+∑ = 1×0 + 2×0 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 0
+
+📍 Position (2,2):
+∑ = 1×0 + 2×0 + 1×0 + 2×0 + 4×1 + 2×0 + 1×0 + 2×0 + 1×0 = 4
+
+📍 Position (2,3):
+∑ = 1×0 + 2×1 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 2
+
+📍 Position (3,1):
+∑ = 1×0 + 2×0 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 0
+
+📍 Position (3,2):
+∑ = 1×0 + 2×0 + 1×0 + 2×0 + 4×1 + 2×0 + 1×0 + 2×0 + 1×0 = 4
+
+📍 Position (3,3):
+∑ = 1×0 + 2×1 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 2
+```
+
+**🎯 Final Result w ★ f_a:**
+```
+📊 Output Matrix:
 | 0  0  0 |
 | 0  4  2 |
 | 0  4  2 |
 ```
 
-#### **Correlation w ☆ f**
-
-**Ukuran Result = (5+3-1) × (5+3-1) = 7 × 7**
-
-**Perhitungan Korelasi (beberapa posisi kunci):**
-
-**Pusat (4,4):**
-```
-1×0 + 2×0 + 1×0 + 2×0 + 4×1 + 2×0 + 1×0 + 2×0 + 1×0 = 4
+**💡 Interpretasi:**
+- Nilai non-nol hanya di posisi yang sesuai dengan pola 1's di f_a
+- Posisi (2,2) dan (3,2) mendapatkan nilai lebih tinggi karena pusat kernel
+- Efek smoothing dengan pembobotan Gaussian
 ```
 
-**w ☆ f =**
+---
+
+#### **🔍 Case Q2a: Correlation w ☆ f_a**
+
+**📐 Correlation Formula:**
 ```
+g(x,y) = Σ_{s=-1}^{1} Σ_{t=-1}^{1} w(s,t) × f(x-s, y-t)
+```
+
+**📏 Dimension Calculation:**
+- Input: 5×5
+- Kernel: 3×3
+- Output: (5+3-1) × (5+3-1) = 7×7
+
+**🎯 Key Positions Analysis:**
+
+```
+📍 Center Position (4,4):
+∑ = 1×0 + 2×0 + 1×0 + 2×0 + 4×1 + 2×0 + 1×0 + 2×0 + 1×0 = 4
+
+📍 Pattern Recognition:
+- Konvolusi menunjukkan pola vertikal yang jelas
+- Nilai maksimal di area di mana kernel sejajar dengan pola 1's
+- Zero-padding memungkinkan hasil penuh 7×7
+```
+
+**🎯 Complete Result w ☆ f_a:**
+```
+📊 7×7 Correlation Matrix:
 | 0  0  0  0  0  0  0 |
 | 0  0  0  0  0  0  0 |
 | 0  0  0  0  2  0  0 |
@@ -1079,63 +1263,95 @@ w =  | 2  4  2 |      f =  | 1  1  1  1  1 |
 | 0  0  0  0  0  0  0 |
 ```
 
-### **Q2b**
-
-**w =**
-```
-| 1  2  1 |
-| 2  4  2 |
-| 1  2  1 |
+**💡 Interpretasi:**
+- Matriks korelasi menghasilkan simetri penuh
+- Nilai maksimal (4) di pusat (4,4)
+- Pola diagonal menunjukkan pencocokan spasial
 ```
 
-**f =**
+---
+
+#### **🧮 Case Q2b: Convolution w ★ f_b**
+
+**📐 Convolution Formula:**
 ```
-| 1  1  1  1  1 |
-| 1  1  1  1  1 |
-| 1  1  1  1  1 |
-| 1  1  1  1  1 |
-| 1  1  1  1  1 |
-```
-
-#### **Convolution w ★ f**
-
-**Ukuran Result = (5-3+1) × (5-3+1) = 3 × 3**
-
-**Perhitungan Konvolusi:**
-```
-(1,1): 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
-(1,2): 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
-(1,3): 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
-
-(2,1): 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
-(2,2): 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
-(2,3): 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
-
-(3,1): 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
-(3,2): 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
-(3,3): 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+g(x,y) = Σ_{s=-1}^{1} Σ_{t=-1}^{1} w(s,t) × f(x+s, y+t)
 ```
 
-**w ★ f =**
+**🔢 Dimension Calculation:**
+- Input: 5×5
+- Kernel: 3×3
+- Output: (5-3+1) × (5-3+1) = 3×3
+
+**🎯 Detailed Calculation:**
+
 ```
+📍 Position (1,1):
+∑ = 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+
+📍 Position (1,2):
+∑ = 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+
+📍 Position (1,3):
+∑ = 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+
+📍 Position (2,1):
+∑ = 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+
+📍 Position (2,2):
+∑ = 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+
+📍 Position (2,3):
+∑ = 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+
+📍 Position (3,1):
+∑ = 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+
+📍 Position (3,2):
+∑ = 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+
+📍 Position (3,3):
+∑ = 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+```
+
+**🎯 Final Result w ★ f_b:**
+```
+📊 Output Matrix:
 | 16  16  16 |
 | 16  16  16 |
 | 16  16  16 |
 ```
 
-#### **Correlation w ☆ f**
-
-**Ukuran Result = (5+3-1) × (5+3-1) = 7 × 7**
-
-**Perhitungan Korelasi (beberapa posisi kunci):**
-
-**Pusat (4,4):**
-```
-1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+**💡 Interpretasi:**
+- Semua nilai output sama (16) karena input uniform
+- 16 merupakan hasil penjumlahan semua kernel weights
+- Menunjukkan efek averaging yang sempurna
 ```
 
-**w ☆ f =**
+---
+
+#### **🔍 Case Q2b: Correlation w ☆ f_b**
+
+**📐 Correlation Formula:**
 ```
+g(x,y) = Σ_{s=-1}^{1} Σ_{t=-1}^{1} w(s,t) × f(x-s, y-t)
+```
+
+**📏 Dimension Calculation:**
+- Input: 5×5
+- Kernel: 3×3
+- Output: (5+3-1) × (5+3-1) = 7×7
+
+**🎯 Center Position Analysis:**
+
+```
+📍 Center Position (4,4):
+∑ = 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+```
+
+**🎯 Complete Result w ☆ f_b:**
+```
+📊 7×7 Correlation Matrix:
 | 16  16  16  16  16  16  16 |
 | 16  16  16  16  16  16  16 |
 | 16  16  16  16  16  16  16 |
@@ -1143,6 +1359,30 @@ w =  | 2  4  2 |      f =  | 1  1  1  1  1 |
 | 16  16  16  16  16  16  16 |
 | 16  16  16  16  16  16  16 |
 | 16  16  16  16  16  16  16 |
+```
+
+**💡 Interpretasi:**
+- Korelasi uniform karena input uniform
+- Nilai konstan 16 di seluruh matriks
+- Menunjukkan pencocokan sempurna di semua posisi
+```
+
+---
+
+#### **🎯 Kesimpulan Q2**
+
+✅ **Konsep Terpahami:**
+- **Convolution**: Menyaring dengan pembobotan, menghasilkan ukuran lebih kecil
+- **Correlation**: Pencocokan spasial, menghasilkan ukuran lebih besar dengan zero-padding
+
+📊 **Perbandingan Hasil:**
+- **f_a**: Pola spesifik → hasil non-uniform, menunjukkan edge detection
+- **f_b**: Input uniform → hasil uniform, menunjukkan averaging sempurna
+
+🔄 **Key Insight:**
+- Konvolusi lebih cocok untuk filtering
+- Korelasi lebih cocok untuk pattern matching
+- Zero-padding mempengaruhi ukuran output korelasi
 ```
 
 ## 14. Latihan Implementasi Matematis
