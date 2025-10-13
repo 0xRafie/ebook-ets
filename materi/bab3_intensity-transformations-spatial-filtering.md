@@ -884,6 +884,267 @@ Tidak ada satu filter yang universal terbaik. Pilihan filter harus didasarkan pa
 
 ---
 
+### Soal Latihan Tambahan
+
+#### Soal Q1: Histogram Equalization
+
+**Pertanyaan:**
+Kita memiliki citra dengan 3 bit/pixel, sehingga rentang nilai yang mungkin adalah 0 hingga 7, dengan distribusi berikut:
+
+| Gray-level value | 0  | 1 | 2 | 3 | 4  | 5 | 6 | 7 |
+| :--------------- | :- | :- | :- | :- | :- | :- | :- | :- |
+| No of Pixel (Histogram value) | 10 | 8 | 9 | 2 | 14 | 1 | 5 | 2 |
+
+a. Gambar histogram.
+b. Dapatkan nilai histogram yang di-equalized.
+c. Gambar histogram yang di-equalized.
+
+**Jawaban:**
+
+**Data Input:**
+- Citra dengan 3 bit/pixel (nilai intensitas 0-7)
+- Total piksel = 10 + 8 + 9 + 2 + 14 + 1 + 5 + 2 = 51
+
+**a. Histogram**
+```
+Histogram
+Value | Frequency
+0     | 10
+1     | 8
+2     | 9
+3     | 2
+4     | 14
+5     | 1
+6     | 5
+7     | 2
+```
+
+**b. Nilai Equalized Histogram**
+
+**Langkah 1: Hitung PMF (Probability Mass Function)**
+```
+PMF(r) = histogram(r) / total_piksel
+
+PMF(0) = 10/51 = 0.196
+PMF(1) = 8/51 = 0.157
+PMF(2) = 9/51 = 0.176
+PMF(3) = 2/51 = 0.039
+PMF(4) = 14/51 = 0.275
+PMF(5) = 1/51 = 0.020
+PMF(6) = 5/51 = 0.098
+PMF(7) = 2/51 = 0.039
+```
+
+**Langkah 2: Hitung CDF (Cumulative Distribution Function)**
+```
+CDF(0) = PMF(0) = 0.196
+CDF(1) = CDF(0) + PMF(1) = 0.196 + 0.157 = 0.353
+CDF(2) = CDF(1) + PMF(2) = 0.353 + 0.176 = 0.529
+CDF(3) = CDF(2) + PMF(3) = 0.529 + 0.039 = 0.568
+CDF(4) = CDF(3) + PMF(4) = 0.568 + 0.275 = 0.843
+CDF(5) = CDF(4) + PMF(5) = 0.843 + 0.020 = 0.863
+CDF(6) = CDF(5) + PMF(6) = 0.863 + 0.098 = 0.961
+CDF(7) = CDF(6) + PMF(7) = 0.961 + 0.039 = 1.000
+```
+
+**Langkah 3: Hitung nilai equalized**
+```
+s_k = round(CDF(k) × 7)  [karena 3-bit range: 0-7]
+
+s(0) = round(0.196 × 7) = round(1.372) = 1
+s(1) = round(0.353 × 7) = round(2.471) = 2
+s(2) = round(0.529 × 7) = round(3.703) = 4
+s(3) = round(0.568 × 7) = round(3.976) = 4
+s(4) = round(0.843 × 7) = round(5.901) = 6
+s(5) = round(0.863 × 7) = round(6.041) = 6
+s(6) = round(0.961 × 7) = round(6.727) = 7
+s(7) = round(1.000 × 7) = round(7.000) = 7
+```
+
+**Hasil Equalized Histogram Values:**
+```
+Input → Output mapping:
+0 → 1
+1 → 2
+2 → 4
+3 → 4
+4 → 6
+5 → 6
+6 → 7
+7 → 7
+```
+
+**c. Histogram Equalized**
+```
+Equalized Histogram
+Value | Frequency
+0     | 0
+1     | 10
+2     | 8
+3     | 0
+4     | 11 (9+2)
+5     | 0
+6     | 15 (14+1)
+7     | 7 (5+2)
+```
+
+#### Soal Q2: Convolution and Correlation
+
+**Pertanyaan:**
+Hitung konvolusi `w ★ f` dan korelasi `w ☆ f` menggunakan zero padding minimal yang diperlukan.
+
+**a.**
+```
+     | 1  2  1 |         | 0  0  0  0  0 |
+w =  | 2  4  2 |      f =  | 0  0  1  0  0 |
+     | 1  2  1 |         | 0  0  1  0  0 |
+                       | 0  0  1  0  0 |
+                       | 0  0  0  0  0 |
+```
+
+**b.**
+```
+     | 1  2  1 |         | 1  1  1  1  1 |
+w =  | 2  4  2 |      f =  | 1  1  1  1  1 |
+     | 1  2  1 |         | 1  1  1  1  1 |
+                       | 1  1  1  1  1 |
+                       | 1  1  1  1  1 |
+```
+
+**Jawaban:**
+
+### **Q2a**
+
+**w =**
+```
+| 1  2  1 |
+| 2  4  2 |
+| 1  2  1 |
+```
+
+**f =**
+```
+| 0  0  0  0  0 |
+| 0  0  1  0  0 |
+| 0  0  1  0  0 |
+| 0  0  1  0  0 |
+| 0  0  0  0  0 |
+```
+
+#### **Convolution w ★ f**
+
+**Ukuran Result = (5-3+1) × (5-3+1) = 3 × 3**
+
+**Perhitungan Konvolusi:**
+```
+(1,1): 1×0 + 2×0 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 0
+(1,2): 1×0 + 2×0 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 0
+(1,3): 1×0 + 2×0 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 0
+
+(2,1): 1×0 + 2×0 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 0
+(2,2): 1×0 + 2×0 + 1×0 + 2×0 + 4×1 + 2×0 + 1×0 + 2×0 + 1×0 = 4
+(2,3): 1×0 + 2×1 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 2
+
+(3,1): 1×0 + 2×0 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 0
+(3,2): 1×0 + 2×0 + 1×0 + 2×0 + 4×1 + 2×0 + 1×0 + 2×0 + 1×0 = 4
+(3,3): 1×0 + 2×1 + 1×0 + 2×0 + 4×0 + 2×0 + 1×0 + 2×0 + 1×0 = 2
+```
+
+**w ★ f =**
+```
+| 0  0  0 |
+| 0  4  2 |
+| 0  4  2 |
+```
+
+#### **Correlation w ☆ f**
+
+**Ukuran Result = (5+3-1) × (5+3-1) = 7 × 7**
+
+**Perhitungan Korelasi (beberapa posisi kunci):**
+
+**Pusat (4,4):**
+```
+1×0 + 2×0 + 1×0 + 2×0 + 4×1 + 2×0 + 1×0 + 2×0 + 1×0 = 4
+```
+
+**w ☆ f =**
+```
+| 0  0  0  0  0  0  0 |
+| 0  0  0  0  0  0  0 |
+| 0  0  0  0  2  0  0 |
+| 0  0  0  4  2  0  0 |
+| 0  0  2  4  2  0  0 |
+| 0  0  0  0  0  0  0 |
+| 0  0  0  0  0  0  0 |
+```
+
+### **Q2b**
+
+**w =**
+```
+| 1  2  1 |
+| 2  4  2 |
+| 1  2  1 |
+```
+
+**f =**
+```
+| 1  1  1  1  1 |
+| 1  1  1  1  1 |
+| 1  1  1  1  1 |
+| 1  1  1  1  1 |
+| 1  1  1  1  1 |
+```
+
+#### **Convolution w ★ f**
+
+**Ukuran Result = (5-3+1) × (5-3+1) = 3 × 3**
+
+**Perhitungan Konvolusi:**
+```
+(1,1): 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+(1,2): 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+(1,3): 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+
+(2,1): 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+(2,2): 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+(2,3): 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+
+(3,1): 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+(3,2): 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+(3,3): 1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+```
+
+**w ★ f =**
+```
+| 16  16  16 |
+| 16  16  16 |
+| 16  16  16 |
+```
+
+#### **Correlation w ☆ f**
+
+**Ukuran Result = (5+3-1) × (5+3-1) = 7 × 7**
+
+**Perhitungan Korelasi (beberapa posisi kunci):**
+
+**Pusat (4,4):**
+```
+1×1 + 2×1 + 1×1 + 2×1 + 4×1 + 2×1 + 1×1 + 2×1 + 1×1 = 16
+```
+
+**w ☆ f =**
+```
+| 16  16  16  16  16  16  16 |
+| 16  16  16  16  16  16  16 |
+| 16  16  16  16  16  16  16 |
+| 16  16  16  16  16  16  16 |
+| 16  16  16  16  16  16  16 |
+| 16  16  16  16  16  16  16 |
+| 16  16  16  16  16  16  16 |
+```
+
 ## 14. Latihan Implementasi Matematis
 
 ### Soal 3.4: Transformasi Intensitas dengan Matriks Konkret
@@ -1130,3 +1391,443 @@ g(3,3) = [-1×20 + 0×30 + 1×40] + [-2×25 + 0×35 + 2×45] + [-1×30 + 0×40 +
 
 **Catatan Implementasi:**
 Untuk citra lengkap, operasi ini diulang untuk setiap piksel (kecuali boundary) dengan sliding window approach.
+
+---
+
+### Soal 3.7: Piecewise-Linear Transformations
+
+**Pertanyaan:** Diberikan citra grayscale dengan rentang intensitas [0, 255]. Buat implementasi piecewise-linear transformation dengan spesifikasi berikut:
+
+- Untuk r ≤ 50: s = r × 2 (enhancement area gelap)
+- Untuk 50 < r ≤ 150: s = r (area normal)
+- Untuk r > 150: s = 255 - (255 - r) × 0.5 (compression area terang)
+
+Tentukan:
+1. Grafik fungsi transformasi
+2. Hasil transformasi untuk piksel dengan nilai [25, 60, 100, 180]
+3. Analisis efek visual yang dihasilkan
+
+**Jawaban:**
+
+#### 1. Grafik Fungsi Transformasi
+
+Fungsi piecewise-linear dapat ditulis sebagai:
+```
+s = f(r) =
+{
+    2r                    , jika r ≤ 50
+    r                    , jika 50 < r ≤ 150
+    255 - 0.5(255 - r)   , jika r > 150
+}
+```
+
+Grafik terdiri dari tiga segmen:
+- **Segmen 1** (0 ≤ r ≤ 50): Garis lurus dengan slope 2, memperbesar nilai gelap
+- **Segmen 2** (50 < r ≤ 150): Garis lurus dengan slope 1, tidak ada perubahan
+- **Segmen 3** (r > 150): Garis lurus dengan slope 0.5, mengompres nilai terang
+
+#### 2. Hasil Transformasi untuk Nilai Spesifik
+
+**a. r = 25**
+```
+s = 2 × 25 = 50
+```
+
+**b. r = 60**
+```
+s = 60 (karena 50 < 60 ≤ 150)
+```
+
+**c. r = 100**
+```
+s = 100 (karena 50 < 100 ≤ 150)
+```
+
+**d. r = 180**
+```
+s = 255 - 0.5 × (255 - 180)
+  = 255 - 0.5 × 75
+  = 255 - 37.5
+  = 217.5 ≈ 218
+```
+
+#### 3. Analisis Efek Visual
+
+**Efek yang Dihasilkan:**
+- **Area gelap (r ≤ 50):** Peningkatan kontras signifikan, area gelap menjadi lebih terang
+- **Area normal (50 < r ≤ 150):** Tidak ada perubahan, mempertahankan informasi asli
+- **Area terang (r > 150):** Kompresi nilai, mengurangi overexposure
+
+**Aplikasi Praktis:**
+- Enhancement pada citra medis untuk menonjolkan detail gelap
+- Compression pada area terang yang terlalu terang
+- Preservasi detail di area tengah gradien
+
+**Keuntungan:**
+- Kontrol presisi pada setiap rentang intensitas
+- Fleksible untuk aplikasi spesifik
+- Meminim distortion pada area yang sudah baik
+
+---
+
+### Soal 3.8: Adaptive Histogram Equalization
+
+**Pertanyaan:** Bandingkan antara Global Histogram Equalization dan Adaptive Histogram Equalization. Jelaskan konsep, implementasi, dan aplikasi masing-masing teknik.
+
+**Jawaban:**
+
+#### Global Histogram Equalization
+
+**Konsep:**
+- Menggunakan satu fungsi transformasi untuk seluruh citra
+- Mendistribusikan intensitas secara merata di seluruh rentang [0, 255]
+- Menghitung CDF dari histogram keseluruhan citra
+
+**Implementasi:**
+```python
+def global_histogram_equalization(image):
+    # Hitung histogram global
+    hist = np.histogram(image.flatten(), bins=256, range=(0, 256))[0]
+
+    # Hitung CDF global
+    cdf = hist.cumsum()
+
+    # Normalisasi CDF
+    cdf_normalized = cdf * 255.0 / cdf[-1]
+
+    # Buat lookup table
+    lookup_table = cdf_normalized.astype('uint8')
+
+    # Aplikasi transformasi
+    return lookup_table[image]
+```
+
+**Kelebihan:**
+- Sederhana dan cepat
+- Implementasi mudah
+- Cocok untuk citra dengan kontras rendah global
+
+**Kekurangan:**
+- Dapat menghasilkan artifacts
+- Tidak adaptif untuk lokal
+- Mengabaikan karakteristik lokal
+
+#### Adaptive Histogram Equalization
+
+**Konsep:**
+- Membagi citra menjadi beberapa region (tiles)
+- Setiap region memiliki fungsi transformasi sendiri
+- Menghitung CDF lokal untuk setiap region
+- Menggunakan interpolasi untuk smooth transitions
+
+**Implementasi:**
+```python
+def adaptive_histogram_equalization(image, tile_size=64):
+    height, width = image.shape
+    result = np.zeros_like(image)
+
+    # Sliding window approach
+    for i in range(0, height, tile_size//2):
+        for j in range(0, width, tile_size//2):
+            # Ambil region dengan overlap
+            tile = image[i:i+tile_size, j:j+tile_size]
+
+            # Hitung histogram lokal
+            hist = np.histogram(tile.flatten(), bins=256, range=(0, 256))[0]
+
+            # Hitung CDF lokal
+            cdf = hist.cumsum()
+
+            # Normalisasi CDF lokal
+            if cdf[-1] > 0:
+                cdf_normalized = cdf * 255.0 / cdf[-1]
+                lookup_table = cdf_normalized.astype('uint8')
+
+                # Aplikasi ke region
+                tile_result = lookup_table[tile]
+                result[i:i+tile_size, j:j+tile_size] = tile_result
+
+    return result
+```
+
+**Kelebihan:**
+- Preservasi detail lokal
+- Menghasilkan kontras yang lebih natural
+- Mengurangi artifacts
+- Cocok untuk citra dengan kontras tidak merata
+
+**Kekurangan:**
+- Komputasi lebih kompleks
+- Potensi over-enhancement di beberapa area
+- Memerlukan parameter tuning (ukuran tile)
+
+#### Perbandingan Kuantitatif
+
+| Kriteria | Global HE | Adaptive HE |
+|----------|-----------|-------------|
+| **Komputasi** | O(MN) | O(MN × (M/tile_size) × (N/tile_size)) |
+| **Preservasi Detail** | Buruk | Baik |
+| **Artifacts** | Sering | Jarang |
+| **Parameter Tuning** | Tidak diperlukan | Ukuran tile, overlap |
+| **Memory Usage** | Rendah | Sedang |
+
+#### Aplikasi
+
+**Global HE:**
+- Preprocessing otomatis
+- Citra dengan kontras rendah global
+- Situasi di mana speed kritis
+
+**Adaptive HE:**
+- Medical imaging (CT, MRI, X-ray)
+- Citra dengan kontras tidak merata
+- Situasi di mana detail lokal penting
+- Enhancement citra satelit
+
+---
+
+### Soal 3.9: Pemilihan Filter untuk Aplikasi Spesifik
+
+**Pertanyaan:** Diberikan beberapa skenario aplikasi image processing, tentukan filter terbaik untuk setiap kasus dan berikan alasan pemilihan:
+
+1. **Citra medis CT scan** dengan noise Gaussian dan detail anatomi yang penting
+2. **Citra dokumen tua** dengan noise salt-and-pepper dan teks yang harus terjelas
+3. **Citra satelit** dengan noise speckle dan edge yang tajam
+4. **Citra foto portrait** dengan noise ringan dan skin smoothing
+
+**Jawaban:**
+
+#### 1. Citra Medis CT Scan
+
+**Filter yang Direkomendasikan:** **Gaussian Filter (σ=1.5) + Laplacian Enhancement**
+
+**Alasan Pemilihan:**
+- **Gaussian Filter**: Mengurangi noise Gaussian yang umum terjadi pada CT scan
+- **σ=1.5**: Memberikan balance antara noise reduction dan preservasi detail
+- **Laplacian Enhancement**: Memperkuat edge anatomi tanpa menghilangkan detail vital
+
+**Alternatif:** Adaptive Median Filter untuk noise yang lebih kompleks
+
+**Implementasi:**
+```python
+def ct_scan_enhancement(image):
+    # Step 1: Reduce Gaussian noise
+    denoised = gaussian_filter(image, sigma=1.5)
+
+    # Step 2: Enhance edges
+    laplacian = cv2.Laplacian(denoised, cv2.CV_64F)
+    enhanced = denoised - 0.5 * laplacian
+
+    return enhanced
+```
+
+#### 2. Citra Dokumen Tua
+
+**Filter yang Direkomendasikan:** **Adaptive Median Filter (3×3-5×5) + Thresholding**
+
+**Alasan Pemilihan:**
+- **Adaptive Median Filter**: Sangat efektif untuk salt-and-pepper noise
+- **Ukuran adaptif**: Menyesuaikan berdasarkan kepadatan noise lokal
+- **Thresholding**: Menghasilkan citra biner yang ideal untuk OCR
+
+**Alternatif:** Bilateral filter untuk preservasi edge yang lebih baik
+
+**Implementasi:**
+```python
+def document_restoration(image):
+    # Step 1: Remove salt-and-pepper noise
+    denoised = cv2.medianBlur(image, 3)
+
+    # Step 2: Adaptive thresholding
+    _, binary = cv2.threshold(denoised, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+
+    return binary
+```
+
+#### 3. Citra Satelit
+
+**Filter yang Direkomendasikan:** **Lee Filter untuk Speckle Noise + Edge Preservation**
+
+**Alasan Pemilihan:**
+- **Lee Filter**: Dirancang khusus untuk speckle noise pada citra radar
+- **Statistical approach**: Menggunakan statistik lokal untuk noise reduction
+- **Edge preservation**: Menghindari blurring pada edge penting
+
+**Alternatif:** Frost filter atau Gamma MAP filter
+
+**Implementasi:**
+```python
+def lee_filter(image, size=7, damping_factor=1):
+    # Implementasi Lee filter sederhana
+    mean_filtered = cv2.boxFilter(image, -1, (size, size))
+    variance = cv2.boxFilter(image**2, -1, (size, size)) - mean_filtered**2
+
+    damping = damping_factor / (variance + 1e-6)
+    result = mean_filtered + damping * (image - mean_filtered)
+
+    return result
+```
+
+#### 4. Citra Foto Portrait
+
+**Filter yang Direkomendasikan:** **Bilateral Filter + Gaussian Smoothing**
+
+**Alasan Pemilihan:**
+- **Bilateral Filter**: Mengurangi noise sambil mempertahankan edge wajah
+- **Domain-range filtering**: Memfilter berdasarkan spasial dan intensitas
+- **Skin smoothing**: Hasil natural tanpa loss detail penting
+
+**Alternatif:** Non-local means filter untuk hasil yang lebih halus
+
+**Implementasi:**
+```python
+def portrait_enhancement(image):
+    # Step 1: Bilateral filtering for skin smoothing
+    smooth = cv2.bilateralFilter(image, 15, 75, 75)
+
+    # Step 2: Light Gaussian smoothing for natural look
+    final = cv2.GaussianBlur(smooth, (3, 3), 0.5)
+
+    return final
+```
+
+#### Tabel Rekomendasi Filter
+
+| Aplikasi | Filter Utama | Filter Pendukung | Parameter Optimal |
+|----------|-------------|-----------------|------------------|
+| **CT Scan** | Gaussian Filter | Laplacian | σ=1.5 |
+| **Dokumen** | Adaptive Median | Thresholding | 3×3-5×5 |
+| **Satelit** | Lee Filter | Edge Detection | size=7 |
+| **Portrait** | Bilateral Filter | Gaussian | d=15, σ=75 |
+
+---
+
+### Soal 3.10: Evaluasi Kinerja Filter
+
+**Pertanyaan:** Anda diminta untuk mengevaluasi performa tiga filter berikut pada citra test dengan ground truth:
+
+1. **Mean Filter** (3×3)
+2. **Median Filter** (3×3)
+3. **Gaussian Filter** (σ=1.0)
+
+Diberikan:
+- Citra original (ground truth): `f(x,y)`
+- Citra dengan noise: `g(x,y)`
+- Citra hasil filtering: `ĝ(x,y)`
+
+Hitung metrik evaluasi berikut:
+1. **Mean Squared Error (MSE)**
+2. **Peak Signal-to-Noise Ratio (PSNR)**
+3. **Structural Similarity Index (SSIM)**
+
+Berikan analisis komprehensif performa masing-masing filter.
+
+**Jawaban:**
+
+#### Formula Evaluasi
+
+**1. Mean Squared Error (MSE)**
+```
+MSE = (1/MN) × ΣΣ [f(x,y) - ĝ(x,y)]²
+```
+- Semakin kecil nilai MSE, semakin baik performa filter
+
+**2. Peak Signal-to-Noise Ratio (PSNR)**
+```
+PSNR = 10 × log₁₀(L²/MSE) [dB]
+```
+- Semakin besar nilai PSNR, semakin baik performa filter
+- L = 255 untuk 8-bit image
+
+**3. Structural Similarity Index (SSIM)**
+```
+SSIM(x,y) = [2μₓμᵧ + C₁][2σₓᵧ + C₂] / [(μₓ² + μᵧ² + C₁)(σₓ² + σᵧ² + C₂)]
+```
+- Rentang nilai: [-1, 1]
+- Semakin mendekati 1, semakin mirah struktur
+
+#### Contoh Perhitungan
+
+Diberikan citra 4×4 sederhana:
+
+**Citra Original (Ground Truth):**
+```
+     100  110  120  130
+     105  115  125  135
+     110  120  130  140
+     115  125  135  145
+```
+
+**Citra dengan Noise (Gaussian σ=20):**
+```
+     90   125   115   140
+     110   100   130   125
+     125   115   140   135
+     120   130   125   150
+```
+
+**Hasil Filtering (Mean Filter):**
+```
+     108  112  124  132
+     115  120  128  133
+     118  125  130  138
+     125  128  135  142
+```
+
+**Perhitungan MSE:**
+```
+MSE = [(100-108)² + (110-112)² + ... + (145-142)²] / 16
+    = [64 + 4 + 25 + 64 + 100 + 25 + 25 + 4 + 225 + 25 + 100 + 16 + 100 + 9 + 0 + 9] / 16
+    = 817 / 16 = 51.06
+```
+
+**Perhitungan PSNR:**
+```
+PSNR = 10 × log₁₀(255²/51.06)
+     = 10 × log₁₀(1275.15)
+     = 10 × 3.106 = 31.06 dB
+```
+
+**Perhitungan SSIM (untuk region 2×2):**
+```
+Untuk region pertama [100,110;105,115]:
+μₓ = 107.5, μᵧ = 108.75
+σₓ² = 18.75, σᵧ² = 20.31
+σₓᵧ = 19.53
+SSIM = [2×107.5×108.75 + C₁][2×19.53 + C₂] / [(107.5²+108.75²+C₁)(18.75+20.31+C₂)]
+```
+
+#### Analisis Performa Filter
+
+**1. Mean Filter**
+- **MSE**: Sedang (~50-60 untuk noise Gaussian)
+- **PSNR**: Baik (~28-32 dB)
+- **SSIM**: Sedang (~0.7-0.8)
+- **Kekurangan**: Menghasilkan blurring, merusak detail edge
+
+**2. Median Filter**
+- **MSE**: Rendah untuk salt-and-pepper (~20-40)
+- **PSNR**: Baik untuk impulse noise (~30-35 dB)
+- **SSIM**: Baik untuk preservasi edge (~0.8-0.9)
+- **Keunggulan**: Preservasi edge yang baik untuk noise impulsif
+
+**3. Gaussian Filter**
+- **MSE**: Terendah untuk Gaussian noise (~30-50)
+- **PSNR**: Tertinggi untuk Gaussian noise (~30-33 dB)
+- **SSIM**: Baik untuk natural appearance (~0.75-0.85)
+- **Keunggulan**: Optimal untuk noise Gaussian, hasil natural
+
+#### Rekomendasi Berdasarkan Tipe Noise
+
+| Tipe Noise | Filter Terbaik | MSE Range | PSNR Range | SSIM Range |
+|------------|---------------|-----------|------------|------------|
+| **Gaussian** | Gaussian | 30-50 | 30-33 | 0.75-0.85 |
+| **Salt-Pepper** | Median | 20-40 | 30-35 | 0.8-0.9 |
+| **Mixed** | Hybrid (Median + Gaussian) | 25-45 | 28-32 | 0.7-0.8 |
+
+**Kesimpulan:**
+Pemilihan filter harus didasarkan pada:
+1. Karakteristik noise dominan
+2. Kebutuhan preservasi detail
+3. Trade-off antara noise reduction dan artifacts
+4. Komputasi complexity constraints
