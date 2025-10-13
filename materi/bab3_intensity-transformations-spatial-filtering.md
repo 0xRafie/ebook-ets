@@ -2,6 +2,78 @@
 
 ## Berdasarkan Bab 3: Intensity Transformations and Spatial Filtering
 
+## Daftar Isi
+
+1. [Pendahuluan](#1-pendahuluan)
+   - Transformasi Intensitas
+   - Filtering Spasial
+
+2. [Transformasi Intensitas Dasar](#2-transformasi-intensitas-dasar)
+   - Fungsi Transformasi
+   - Linear Transformation
+   - Logarithmic Transformation
+   - Power-Law (Gamma) Transformation
+   - Piecewise-Linear Transformation
+
+3. [Histogram Processing](#3-histogram-processing)
+   - Histogram Definition
+   - Normalized Histogram
+   - Histogram Equalization
+   - Histogram Matching
+   - Local Histogram Processing
+
+4. [Spatial Filtering](#4-spatial-filtering)
+   - Fundamental Concepts
+   - Convolution Operation
+   - Smoothing Linear Filters
+   - Sharpening Linear Filters
+
+5. [Order-Statistics Filters](#5-order-statistics-filters)
+   - Median Filter
+   - Variations (Max, Min, Midpoint, Alpha-Trimmed)
+
+6. [Gradient-Based Filters](#6-gradient-based-filters)
+   - First-Order Derivatives (Sobel, Prewitt, Roberts)
+   - Second-Order Derivatives (Laplacian of Gaussian)
+
+7. [Adaptive Filters](#7-adaptive-filters)
+   - Adaptive Median Filter
+   - Adaptive Local Noise Reduction
+
+8. [Transformations for Color Images](#8-transformations-for-color-images)
+   - Color Space Considerations
+   - Color Enhancement Techniques
+
+9. [Implementation Considerations](#9-implementation-considerations)
+   - Computational Complexity
+   - Boundary Handling
+   - Hardware Acceleration
+
+10. [Applications](#10-applications)
+    - Medical Imaging
+    - Remote Sensing
+    - Computer Vision
+    - Photography
+
+11. [Advanced Topics](#11-advanced-topics)
+    - Multi-scale Filtering
+    - Anisotropic Filtering
+    - Deep Learning Approaches
+
+12. [Performance Evaluation](#12-performance-evaluation)
+    - Quality Metrics
+    - Visual Assessment
+
+13. [Latihan Soal dan Jawaban](#13-latihan-soal-dan-jawaban)
+    - Soal 3.1: Transformasi Intensitas Dasar
+    - Soal 3.2: Histogram Processing
+    - Soal 3.3: Spatial Filtering untuk Noise Reduction
+    - Soal 3.4: Transformasi Intensitas dengan Matriks Konkret
+    - Soal 3.5: Histogram Equalization dengan Data Numerik
+    - Soal 3.6: Spatial Filtering dengan Operasi Konvolusi
+
+14. [Kesimpulan](#kesimpulan)
+
 ## 1. Pendahuluan
 
 ### Transformasi Intensitas
